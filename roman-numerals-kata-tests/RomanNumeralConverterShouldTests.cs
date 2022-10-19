@@ -14,7 +14,7 @@ namespace roman_numerals_kata_tests {
     {
         public static string ToRomanNumeral(int number)
         {
-            throw new NotImplementedException();
+            return "I";
         }
     }
 }
