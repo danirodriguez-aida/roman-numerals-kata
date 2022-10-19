@@ -37,5 +37,12 @@ namespace roman_numerals_kata_tests {
             var result = RomanNumeralConverter.ToRomanNumeral(5);
             result.Should().Be("V");
         }
+
+        [Test]
+        public void return_VI_for_6()
+        {
+            var result = RomanNumeralConverter.ToRomanNumeral(6);
+            result.Should().Be("VI");
+        }
     }
 }
