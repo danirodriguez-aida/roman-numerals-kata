@@ -13,7 +13,7 @@ public class RomanNumeralConverter
         }
         if (number >= 5)
         {
-            result = "V";
+            result += "V";
             number -= 5;
         }
         if (number % 10 == 4)
