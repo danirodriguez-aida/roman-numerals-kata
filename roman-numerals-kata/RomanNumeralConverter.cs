@@ -4,8 +4,11 @@ public class RomanNumeralConverter
 {
     public static string ToRomanNumeral(int number)
     {
-        if (number == 2) return "II";
-        if (number == 3) return "III";
-        return "I";
+        var result = string.Empty;
+        for (var i = 0; i < number; i++)
+        {
+            result += "I";
+        }
+        return result;
     }
 }
