@@ -9,5 +9,12 @@ namespace roman_numerals_kata_tests {
             var result = RomanNumeralConverter.ToRomanNumeral(1);
             result.Should().Be("I");
         }
+
+        [Test]
+        public void return_II_for_2()
+        {
+            var result = RomanNumeralConverter.ToRomanNumeral(2);
+            result.Should().Be("II");
+        }
     }
 }
