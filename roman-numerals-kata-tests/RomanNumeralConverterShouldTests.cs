@@ -30,5 +30,12 @@ namespace roman_numerals_kata_tests {
             var result = RomanNumeralConverter.ToRomanNumeral(4);
             result.Should().Be("IV");
         }
+
+        [Test]
+        public void return_IV_for_5()
+        {
+            var result = RomanNumeralConverter.ToRomanNumeral(5);
+            result.Should().Be("V");
+        }
     }
 }
