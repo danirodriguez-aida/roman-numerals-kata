@@ -1,4 +1,5 @@
 using FluentAssertions;
+using roman_numerals_kata;
 
 namespace roman_numerals_kata_tests {
     public class RomanNumeralConverterShouldTests {
@@ -7,14 +8,6 @@ namespace roman_numerals_kata_tests {
         {
             var result = RomanNumeralConverter.ToRomanNumeral(1);
             result.Should().Be("I");
-        }
-    }
-
-    public class RomanNumeralConverter
-    {
-        public static string ToRomanNumeral(int number)
-        {
-            return "I";
         }
     }
 }
