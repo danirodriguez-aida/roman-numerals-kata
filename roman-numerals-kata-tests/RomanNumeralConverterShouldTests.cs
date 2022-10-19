@@ -13,6 +13,7 @@ namespace roman_numerals_kata_tests {
         [TestCase(6,"VI")]
         [TestCase(7,"VII")]
         [TestCase(8,"VIII")]
+        [TestCase(9,"IX")]
         public void return_roman_numeral_for(int number, string expected)
         {
             var result = RomanNumeralConverter.ToRomanNumeral(number);
