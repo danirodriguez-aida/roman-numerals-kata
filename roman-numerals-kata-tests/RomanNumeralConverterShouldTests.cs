@@ -32,7 +32,7 @@ namespace roman_numerals_kata_tests {
         }
 
         [Test]
-        public void return_IV_for_5()
+        public void return_V_for_5()
         {
             var result = RomanNumeralConverter.ToRomanNumeral(5);
             result.Should().Be("V");
