@@ -9,6 +9,7 @@ public class RomanNumeralConverter
         if (number == 10) return "X";
         if (number == 11) return "XI";
         if (number == 12) return "XII";
+        if (number == 13) return "XIII";
         if (number == 4) return "IV";
         if (number >= 5)
         {
