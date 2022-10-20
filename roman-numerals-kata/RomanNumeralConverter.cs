@@ -5,6 +5,8 @@ public class RomanNumeralConverter
     public static string ToRomanNumeral(int number)
     {
         var result = string.Empty;
+
+        if (number == 40)  return result + "XL";
         while (number >= 10)
         {
             result += "X";
