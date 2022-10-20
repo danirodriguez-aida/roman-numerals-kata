@@ -5,9 +5,9 @@ public class RomanNumeralConverter
     public static string ToRomanNumeral(int number)
     {
         var result = string.Empty;
-        if (number >= 10)
+        while (number >= 10)
         {
-            result = "X";
+            result += "X";
             number -= 10;
         }
         if (number == 9) return result + "IX";
