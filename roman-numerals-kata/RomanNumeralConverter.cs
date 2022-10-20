@@ -4,6 +4,17 @@ public class RomanNumeralConverter
 {
     private int _number;
 
+    private static readonly Dictionary<int, string> RomanNumerals = new()
+    {
+        { 1, "I" },
+        { 5, "V" },
+        { 10, "X" },
+        { 50, "L" },
+        { 100, "C" },
+        { 500, "D" },
+        { 1000, "M" },
+    };
+
     public RomanNumeralConverter(int number)
     {
         _number = number;
@@ -23,43 +34,51 @@ public class RomanNumeralConverter
         var result = string.Empty;
         if (_number == 9)
         {
-            return result + "IX";
+            _number -= 9;
+            return RomanNumerals[1] + RomanNumerals[10];
         }
         if (_number >= 5)
         {
-            result += "V";
             _number -= 5;
+            result += RomanNumerals[5];
         }
-        if (_number == 4)  return result + "IV";
+
+        if (_number == 4)
+        {
+            _number -= 4;
+            return RomanNumerals[1] + RomanNumerals[5];
+        }
         while (_number >= 1)
         {
-            result += "I";
             _number -= 1;
+            result += RomanNumerals[1];
         }
         return result;
     }
+
     private string ProcessNumberLess100()
     {
         var result = string.Empty;
         if (_number >= 90)
         {
-            result += "XC";
             _number -= 90;
+            return RomanNumerals[10] + RomanNumerals[100];
         }
         if (_number >= 50)
         {
-            result += "L";
             _number -= 50;
+            result += RomanNumerals[50];
+           
         }
         if (_number >= 40)
         {
-            result += "XL";
             _number -= 40;
+            return RomanNumerals[10] + RomanNumerals[50];
         }
         while (_number >= 10)
         {
-            result += "X";
             _number -= 10;
+            result += RomanNumerals[10];
         }
         return result;
     }
@@ -68,23 +87,23 @@ public class RomanNumeralConverter
         var result = string.Empty;
         if (_number >= 900)
         {
-            result += "CM";
             _number -= 900;
+            return RomanNumerals[100] + RomanNumerals[1000];
         }
         if (_number >= 500)
         {
-            result += "D";
             _number -= 500;
+            result += RomanNumerals[500];
         }
         if (_number >= 400)
         {
-            result += "CD";
-            _number -= 400;
+            _number -= 40;
+            return RomanNumerals[100] + RomanNumerals[500];
         }
-        while (_number >= 100)
+        while (_number >= 1000)
         {
-            result += "C";
             _number -= 100;
+            result += RomanNumerals[100];
         }
         return result;
     }
