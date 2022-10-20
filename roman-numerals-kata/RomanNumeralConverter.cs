@@ -4,13 +4,13 @@ public class RomanNumeralConverter
 {
     public static string ToRomanNumeral(int number)
     {
-        if (number == 9) return "IX";
         var result = string.Empty;
         if (number >= 10)
         {
             result = "X";
             number -= 10;
         }
+        if (number == 9) return result + "IX";
         if (number >= 5)
         {
             result += "V";
