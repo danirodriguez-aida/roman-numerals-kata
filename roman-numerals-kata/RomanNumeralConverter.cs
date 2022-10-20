@@ -12,6 +12,7 @@ public class RomanNumeralConverter
     {
         var result = string.Empty;
         var romanNumeralConverter = new RomanNumeralConverter(number);
+        result += romanNumeralConverter.ProcessNumberLess1000();
         result += romanNumeralConverter.ProcessNumberLess100();
         result += romanNumeralConverter.ProcessNumberLess10();
         return result;
@@ -59,6 +60,31 @@ public class RomanNumeralConverter
         {
             result += "X";
             _number -= 10;
+        }
+        return result;
+    }
+    private string ProcessNumberLess1000()
+    {
+        var result = string.Empty;
+        if (_number >= 900)
+        {
+            result += "CM";
+            _number -= 900;
+        }
+        if (_number >= 500)
+        {
+            result += "D";
+            _number -= 500;
+        }
+        if (_number >= 400)
+        {
+            result += "CD";
+            _number -= 400;
+        }
+        while (_number >= 100)
+        {
+            result += "C";
+            _number -= 100;
         }
         return result;
     }
