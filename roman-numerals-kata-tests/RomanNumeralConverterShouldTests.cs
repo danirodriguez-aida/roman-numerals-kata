@@ -26,6 +26,7 @@ namespace roman_numerals_kata_tests {
         [TestCase(44,"XLIV")]
         [TestCase(89,"LXXXIX")]
         [TestCase(99,"XCIX")]
+        [TestCase(999,"CMXCIX")]
         public void return_roman_numeral_for(int number, string expected)
         {
             var result = RomanNumeralConverter.ToRomanNumeral(number);
