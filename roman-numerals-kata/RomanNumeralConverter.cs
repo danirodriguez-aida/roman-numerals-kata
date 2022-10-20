@@ -16,11 +16,7 @@ public class RomanNumeralConverter
             result += "V";
             number -= 5;
         }
-        if (number % 10 == 4)
-        {
-            result += "IV";
-            number -= 4;
-        }
+        if (number == 4)  return result + "IV";
         for (var i = 0; i < number; i++)
         {
             result += "I";
