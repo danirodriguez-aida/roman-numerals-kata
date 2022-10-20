@@ -23,87 +23,35 @@ public class RomanNumeralConverter
     {
         var result = string.Empty;
         var romanNumeralConverter = new RomanNumeralConverter(number);
-        result += romanNumeralConverter.ProcessNumberLess1000();
-        result += romanNumeralConverter.ProcessNumberLess100();
-        result += romanNumeralConverter.ProcessNumberLess10();
+        result += romanNumeralConverter.ProcessNumberLess(1000);
+        result += romanNumeralConverter.ProcessNumberLess(100);
+        result += romanNumeralConverter.ProcessNumberLess(10);
         return result;
     }
-
-    private string ProcessNumberLess10()
+    private string ProcessNumberLess(int multiplier)
     {
         var result = string.Empty;
-        if (_number == 9)
+        multiplier = (multiplier / 10);
+        if (_number >= (9 * multiplier))
         {
-            _number -= 9;
-            return RomanNumerals[1] + RomanNumerals[10];
+            _number -= (9 * multiplier);
+            return RomanNumerals[1 * multiplier] + RomanNumerals[10 * multiplier];
         }
-        if (_number >= 5)
+        if (_number >= (5* multiplier))
         {
-            _number -= 5;
-            result += RomanNumerals[5];
+            _number -= (5* multiplier);
+            result += RomanNumerals[5* multiplier];
         }
 
-        if (_number == 4)
+        if (_number >= (4* multiplier))
         {
-            _number -= 4;
-            return RomanNumerals[1] + RomanNumerals[5];
+            _number -= (4* multiplier);
+            return RomanNumerals[1* multiplier] + RomanNumerals[5* multiplier];
         }
-        while (_number >= 1)
+        while (_number >= (1* multiplier))
         {
-            _number -= 1;
-            result += RomanNumerals[1];
-        }
-        return result;
-    }
-
-    private string ProcessNumberLess100()
-    {
-        var result = string.Empty;
-        if (_number >= 90)
-        {
-            _number -= 90;
-            return RomanNumerals[10] + RomanNumerals[100];
-        }
-        if (_number >= 50)
-        {
-            _number -= 50;
-            result += RomanNumerals[50];
-           
-        }
-        if (_number >= 40)
-        {
-            _number -= 40;
-            return RomanNumerals[10] + RomanNumerals[50];
-        }
-        while (_number >= 10)
-        {
-            _number -= 10;
-            result += RomanNumerals[10];
-        }
-        return result;
-    }
-    private string ProcessNumberLess1000()
-    {
-        var result = string.Empty;
-        if (_number >= 900)
-        {
-            _number -= 900;
-            return RomanNumerals[100] + RomanNumerals[1000];
-        }
-        if (_number >= 500)
-        {
-            _number -= 500;
-            result += RomanNumerals[500];
-        }
-        if (_number >= 400)
-        {
-            _number -= 40;
-            return RomanNumerals[100] + RomanNumerals[500];
-        }
-        while (_number >= 1000)
-        {
-            _number -= 100;
-            result += RomanNumerals[100];
+            _number -= (1* multiplier);
+            result += RomanNumerals[1* multiplier];
         }
         return result;
     }
