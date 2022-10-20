@@ -20,6 +20,7 @@ namespace roman_numerals_kata_tests {
         [TestCase(13,"XIII")]
         [TestCase(14,"XIV")]
         [TestCase(15,"XV")]
+        [TestCase(19,"XIX")]
         public void return_roman_numeral_for(int number, string expected)
         {
             var result = RomanNumeralConverter.ToRomanNumeral(number);
