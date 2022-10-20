@@ -2,47 +2,63 @@ namespace roman_numerals_kata;
 
 public class RomanNumeralConverter
 {
+    private int _number;
+
+    public RomanNumeralConverter(int number)
+    {
+        _number = number;
+    }
     public static string ToRomanNumeral(int number)
     {
         var result = string.Empty;
+        var romanNumeralConverter = new RomanNumeralConverter(number);
+        result += romanNumeralConverter.ProcessNumberLess100();
+        result += romanNumeralConverter.ProcessNumberLess10();
+        return result;
+    }
 
-
-        // BLOQUE < 100
-        if (number >= 90)
-        {
-            result += "XC";
-            number -= 90;
-        }
-        if (number >= 50)
-        {
-            result += "L";
-            number -= 50;
-        }
-        if (number >= 40)
-        {
-            result += "XL";
-            number -= 40;
-        }
-        while (number >= 10)
-        {
-            result += "X";
-            number -= 10;
-        }
-        // BLOQUE < 10
-        if (number == 9)
+    private string ProcessNumberLess10()
+    {
+        var result = string.Empty;
+        if (_number == 9)
         {
             return result + "IX";
         }
-        if (number >= 5)
+        if (_number >= 5)
         {
             result += "V";
-            number -= 5;
+            _number -= 5;
         }
-        if (number == 4)  return result + "IV";
-        while (number >= 1)
+        if (_number == 4)  return result + "IV";
+        while (_number >= 1)
         {
             result += "I";
-            number -= 1;
+            _number -= 1;
+        }
+        return result;
+    }
+    private string ProcessNumberLess100()
+    {
+        var result = string.Empty;
+        if (_number >= 90)
+        {
+            result += "XC";
+            _number -= 90;
+        }
+        if (_number >= 50)
+        {
+            result += "L";
+            _number -= 50;
+        }
+        if (_number >= 40)
+        {
+            result += "XL";
+            _number -= 40;
+        }
+        while (_number >= 10)
+        {
+            result += "X";
+            _number -= 10;
         }
         return result;
     }
