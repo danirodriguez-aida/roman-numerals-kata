@@ -17,9 +17,10 @@ public class RomanNumeralConverter
             number -= 5;
         }
         if (number == 4)  return result + "IV";
-        for (var i = 0; i < number; i++)
+        while (number >= 1)
         {
             result += "I";
+            number -= 1;
         }
         return result;
     }
