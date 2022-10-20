@@ -6,13 +6,33 @@ public class RomanNumeralConverter
     {
         var result = string.Empty;
 
-        if (number == 40)  return result + "XL";
+
+        // BLOQUE < 100
+        if (number >= 90)
+        {
+            result += "XC";
+            number -= 90;
+        }
+        if (number >= 50)
+        {
+            result += "L";
+            number -= 50;
+        }
+        if (number >= 40)
+        {
+            result += "XL";
+            number -= 40;
+        }
         while (number >= 10)
         {
             result += "X";
             number -= 10;
         }
-        if (number == 9) return result + "IX";
+        // BLOQUE < 10
+        if (number == 9)
+        {
+            return result + "IX";
+        }
         if (number >= 5)
         {
             result += "V";
