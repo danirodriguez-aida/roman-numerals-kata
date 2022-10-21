@@ -1,3 +1,5 @@
+using static System.Formats.Asn1.AsnWriter;
+
 namespace roman_numerals_kata;
 
 public class RomanNumeralConverter
@@ -58,10 +60,18 @@ public class RomanNumeralConverter
     private string ProcessNumberOnScale(int number, int scale)
     {
         var numberToProcess = number * scale;
-        if (_number < numberToProcess) return "";
+        if (_number < numberToProcess) return string.Empty;
         _number -= numberToProcess;
-        if (numberToProcess % (9 * scale) == 0) return RomanNumerals[1 * scale] + RomanNumerals[10 * scale];
-        if (numberToProcess % (4 * scale) == 0) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
+        if (numberToProcess.IsMultipleOf(9 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[10 * scale];
+        if (numberToProcess.IsMultipleOf(4 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
         return RomanNumerals[numberToProcess];
+    }
+
+}
+public static class MultiplesExtension
+{
+    public static bool IsMultipleOf(this int number, int multiple)
+    {
+        return number % multiple == 0;
     }
 }
