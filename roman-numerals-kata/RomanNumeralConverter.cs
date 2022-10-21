@@ -2,6 +2,7 @@ namespace roman_numerals_kata;
 
 public class RomanNumeralConverter {
     private int _number;
+    private string _numberInRomanNumeral = string.Empty;
     private static readonly Dictionary<int, string> RomanNumerals = new()
     {
         { 1, "I" },
@@ -18,23 +19,20 @@ public class RomanNumeralConverter {
     }
 
     public static string ToRomanNumeral(int number) {
-        var result = string.Empty;
         var romanNumeralConverter = new RomanNumeralConverter(number);
         foreach (var scale in NumericalScale.GetScales()) {
-            result += romanNumeralConverter.ProcessNumbersOf(scale);
+          romanNumeralConverter.ProcessNumbersOf(scale);
         }
-        return result;
+        return romanNumeralConverter._numberInRomanNumeral;
     }
 
-    private string ProcessNumbersOf(int scale) {
-        var result = string.Empty;
+    private void ProcessNumbersOf(int scale) {
         var numbersToProcess = new int[] { 9, 5, 4, 1 };
         while (_number >= scale) {
             foreach (var number in numbersToProcess) {
-                result += ProcessNumberOnScale(number, scale);
+                _numberInRomanNumeral += ProcessNumberOnScale(number, scale);
             }
         }
-        return result;
     }
 
     private string ProcessNumberOnScale(int number, int scale) {
