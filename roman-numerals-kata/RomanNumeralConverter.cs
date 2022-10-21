@@ -35,6 +35,7 @@ public class RomanNumeralConverter
     {
         var result = string.Empty;
         var romanNumeralConverter = new RomanNumeralConverter(number);
+        result += romanNumeralConverter.ProcessNumberLess(1000);
         result += romanNumeralConverter.ProcessNumberLess(Multipliers.OneThousand);
         result += romanNumeralConverter.ProcessNumberLess(Multipliers.OneHundred);
         result += romanNumeralConverter.ProcessNumberLess(Multipliers.Ten);
@@ -43,27 +44,12 @@ public class RomanNumeralConverter
     private string ProcessNumberLess(int multiplier)
     {
         var result = string.Empty;
-        var multiplierOf1 = 1 * multiplier;
-        var multiplierOf4 = 4 * multiplier;
-        var multiplierOf5 = 5 * multiplier;
-        var multiplierOf9 = 9 * multiplier;
-        var multiplierOf10 = 10 * multiplier;
-        if (_number >= multiplierOf9)
+        var numbersToProcess = new int[] { 9, 5, 4 ,1 };
+        while (_number >= multiplier)
         {
-            result +=  ConvertToNumeral(9, multiplier);
-        }
-        if (_number >= multiplierOf5)
-        {
-            result +=  ConvertToNumeral(5, multiplier);
-        }
-        if (_number >= multiplierOf4)
-        {
-            result +=  ConvertToNumeral(4, multiplier);
-        }
-
-        while (_number >= multiplierOf1)
-        {
-            result += ConvertToNumeral(1, multiplier);
+            foreach (var number in numbersToProcess) {
+                result += ConvertToNumeral(number, multiplier);
+            }
         }
         return result;
     }
@@ -71,9 +57,10 @@ public class RomanNumeralConverter
     private string ConvertToNumeral(int number, int multiplier)
     {
         var numberToProcess = number * multiplier;
+        if (_number < numberToProcess) return "";
         _number -= numberToProcess;
-        if (numberToProcess % 9 == 0) return RomanNumerals[1 * multiplier] + RomanNumerals[10 * multiplier];
-        if (numberToProcess % 4 == 0) return RomanNumerals[1 * multiplier] + RomanNumerals[5 * multiplier];
+        if (numberToProcess % (9 * multiplier) == 0) return RomanNumerals[1 * multiplier] + RomanNumerals[10 * multiplier];
+        if (numberToProcess % (4 * multiplier) == 0) return RomanNumerals[1 * multiplier] + RomanNumerals[5 * multiplier];
         return RomanNumerals[numberToProcess];
     }
 }
