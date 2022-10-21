@@ -50,29 +50,30 @@ public class RomanNumeralConverter
         var multiplierOf10 = 10 * multiplier;
         if (_number >= multiplierOf9)
         {
-            _number -= multiplierOf9;
-            result += RomanNumerals[multiplierOf1] + RomanNumerals[multiplierOf10];
+            result +=  ConvertToNumeral(9, multiplier);
         }
         if (_number >= multiplierOf5)
         {
-            result +=  ConvertToNumeral(multiplierOf5);
+            result +=  ConvertToNumeral(5, multiplier);
         }
         if (_number >= multiplierOf4)
         {
-            _number -= multiplierOf4;
-            result += RomanNumerals[multiplierOf1] + RomanNumerals[multiplierOf5];
+            result +=  ConvertToNumeral(4, multiplier);
         }
 
         while (_number >= multiplierOf1)
         {
-            result += ConvertToNumeral(multiplierOf1);
+            result += ConvertToNumeral(1, multiplier);
         }
         return result;
     }
 
-    private string ConvertToNumeral(int number)
+    private string ConvertToNumeral(int number, int multiplier)
     {
-        _number -= number;
-        return RomanNumerals[number];
+        var numberToProcess = number * multiplier;
+        _number -= numberToProcess;
+        if (numberToProcess % 9 == 0) return RomanNumerals[1 * multiplier] + RomanNumerals[10 * multiplier];
+        if (numberToProcess % 4 == 0) return RomanNumerals[1 * multiplier] + RomanNumerals[5 * multiplier];
+        return RomanNumerals[numberToProcess];
     }
 }
