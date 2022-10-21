@@ -14,17 +14,19 @@ public class RomanNumeralConverter
         { 1000, "M" },
     };
    
-    private class Multipliers
+    private class NumericalScale
     {
-        public static int Ten => 1;
-        public static int OneHundred => 10;
-        public static int OneThousand => 100;
-        //public static IList<int> GetMultipliers() => new List<int>()
-        //{
-        //    OneThousand,
-        //    OneHundred,
-        //    Ten
-        //};
+        public static int Units => 1;
+        public static int Tens => 10;
+        public static int Hundreds => 100;
+        public static int Thousands => 1000;
+        public static IList<int> GetScales() => new List<int>()
+        {
+            Thousands,
+            Hundreds,
+            Tens,
+            Units
+        };
     }
 
     public RomanNumeralConverter(int number)
@@ -35,13 +37,13 @@ public class RomanNumeralConverter
     {
         var result = string.Empty;
         var romanNumeralConverter = new RomanNumeralConverter(number);
-        result += romanNumeralConverter.ProcessNumberLess(1000);
-        result += romanNumeralConverter.ProcessNumberLess(Multipliers.OneThousand);
-        result += romanNumeralConverter.ProcessNumberLess(Multipliers.OneHundred);
-        result += romanNumeralConverter.ProcessNumberLess(Multipliers.Ten);
+        foreach (var scale in NumericalScale.GetScales())
+        {
+            result += romanNumeralConverter.ProcessNumbersOf(scale);
+        }
         return result;
     }
-    private string ProcessNumberLess(int multiplier)
+    private string ProcessNumbersOf(int multiplier)
     {
         var result = string.Empty;
         var numbersToProcess = new int[] { 9, 5, 4 ,1 };
