@@ -47,16 +47,15 @@ public class RomanNumeralConverter
     {
         var result = string.Empty;
         var numbersToProcess = new int[] { 9, 5, 4 ,1 };
-        while (_number >= scale)
-        {
+        while (_number >= scale) {
             foreach (var number in numbersToProcess) {
-                result += ConvertToNumeral(number, scale);
+                result += ProcessNumberOnScale(number, scale);
             }
         }
         return result;
     }
 
-    private string ConvertToNumeral(int number, int scale)
+    private string ProcessNumberOnScale(int number, int scale)
     {
         var numberToProcess = number * scale;
         if (_number < numberToProcess) return "";
