@@ -1,5 +1,3 @@
-using static System.Formats.Asn1.AsnWriter;
-
 namespace roman_numerals_kata;
 
 public class RomanNumeralConverter
@@ -15,26 +13,12 @@ public class RomanNumeralConverter
         { 500, "D" },
         { 1000, "M" },
     };
-   
-    private class NumericalScale
-    {
-        public static int Units => 1;
-        public static int Tens => 10;
-        public static int Hundreds => 100;
-        public static int Thousands => 1000;
-        public static IList<int> GetScales() => new List<int>()
-        {
-            Thousands,
-            Hundreds,
-            Tens,
-            Units
-        };
-    }
 
     public RomanNumeralConverter(int number)
     {
         _number = number;
     }
+
     public static string ToRomanNumeral(int number)
     {
         var result = string.Empty;
@@ -45,6 +29,7 @@ public class RomanNumeralConverter
         }
         return result;
     }
+
     private string ProcessNumbersOf(int scale)
     {
         var result = string.Empty;
@@ -66,7 +51,6 @@ public class RomanNumeralConverter
         if (numberToProcess.IsMultipleOf(4 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
         return RomanNumerals[numberToProcess];
     }
-
 }
 public static class MultiplesExtension
 {
@@ -74,4 +58,20 @@ public static class MultiplesExtension
     {
         return number % multiple == 0;
     }
+}
+
+public static class NumericalScale
+{
+    private static int Units => 1;
+    private static int Tens => 10;
+    private static int Hundreds => 100;
+    private static int Thousands => 1000;
+
+    public static IEnumerable<int> GetScales() => new List<int>()
+    {
+        Thousands,
+        Hundreds,
+        Tens,
+        Units
+    };
 }
