@@ -1,7 +1,6 @@
 namespace roman_numerals_kata;
 
-public class RomanNumeralConverter
-{
+public class RomanNumeralConverter {
     private int _number;
     private static readonly Dictionary<int, string> RomanNumerals = new()
     {
@@ -14,26 +13,22 @@ public class RomanNumeralConverter
         { 1000, "M" },
     };
 
-    public RomanNumeralConverter(int number)
-    {
+    public RomanNumeralConverter(int number) {
         _number = number;
     }
 
-    public static string ToRomanNumeral(int number)
-    {
+    public static string ToRomanNumeral(int number) {
         var result = string.Empty;
         var romanNumeralConverter = new RomanNumeralConverter(number);
-        foreach (var scale in NumericalScale.GetScales())
-        {
+        foreach (var scale in NumericalScale.GetScales()) {
             result += romanNumeralConverter.ProcessNumbersOf(scale);
         }
         return result;
     }
 
-    private string ProcessNumbersOf(int scale)
-    {
+    private string ProcessNumbersOf(int scale) {
         var result = string.Empty;
-        var numbersToProcess = new int[] { 9, 5, 4 ,1 };
+        var numbersToProcess = new int[] { 9, 5, 4, 1 };
         while (_number >= scale) {
             foreach (var number in numbersToProcess) {
                 result += ProcessNumberOnScale(number, scale);
@@ -42,8 +37,7 @@ public class RomanNumeralConverter
         return result;
     }
 
-    private string ProcessNumberOnScale(int number, int scale)
-    {
+    private string ProcessNumberOnScale(int number, int scale) {
         var numberToProcess = number * scale;
         if (_number < numberToProcess) return string.Empty;
         _number -= numberToProcess;
@@ -52,16 +46,13 @@ public class RomanNumeralConverter
         return RomanNumerals[numberToProcess];
     }
 }
-public static class MultiplesExtension
-{
-    public static bool IsMultipleOf(this int number, int multiple)
-    {
+public static class MultiplesExtension {
+    public static bool IsMultipleOf(this int number, int multiple) {
         return number % multiple == 0;
     }
 }
 
-public static class NumericalScale
-{
+public static class NumericalScale {
     private static int Units => 1;
     private static int Tens => 10;
     private static int Hundreds => 100;
