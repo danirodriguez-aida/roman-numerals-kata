@@ -43,26 +43,26 @@ public class RomanNumeralConverter
         }
         return result;
     }
-    private string ProcessNumbersOf(int multiplier)
+    private string ProcessNumbersOf(int scale)
     {
         var result = string.Empty;
         var numbersToProcess = new int[] { 9, 5, 4 ,1 };
-        while (_number >= multiplier)
+        while (_number >= scale)
         {
             foreach (var number in numbersToProcess) {
-                result += ConvertToNumeral(number, multiplier);
+                result += ConvertToNumeral(number, scale);
             }
         }
         return result;
     }
 
-    private string ConvertToNumeral(int number, int multiplier)
+    private string ConvertToNumeral(int number, int scale)
     {
-        var numberToProcess = number * multiplier;
+        var numberToProcess = number * scale;
         if (_number < numberToProcess) return "";
         _number -= numberToProcess;
-        if (numberToProcess % (9 * multiplier) == 0) return RomanNumerals[1 * multiplier] + RomanNumerals[10 * multiplier];
-        if (numberToProcess % (4 * multiplier) == 0) return RomanNumerals[1 * multiplier] + RomanNumerals[5 * multiplier];
+        if (numberToProcess % (9 * scale) == 0) return RomanNumerals[1 * scale] + RomanNumerals[10 * scale];
+        if (numberToProcess % (4 * scale) == 0) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
         return RomanNumerals[numberToProcess];
     }
 }
