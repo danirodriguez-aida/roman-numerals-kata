@@ -1,6 +1,7 @@
 namespace roman_numerals_kata;
 
-public class RomanNumeralConverter {
+public class RomanNumeralConverter
+{
     private int _number;
     private string _numberInRomanNumeral = string.Empty;
     private static readonly Dictionary<int, string> RomanNumerals = new()
@@ -14,33 +15,43 @@ public class RomanNumeralConverter {
         { 1000, "M" },
     };
 
-    public RomanNumeralConverter(int number) {
+    public RomanNumeralConverter(int number)
+    {
         _number = number;
     }
 
-    public static string ToRomanNumeral(int number) {
+    public static string ToRomanNumeral(int number)
+    {
         var romanNumeralConverter = new RomanNumeralConverter(number);
         romanNumeralConverter.ProcessNumber();
         return romanNumeralConverter._numberInRomanNumeral;
     }
 
-    private void ProcessNumber() {
-        var numbersToProcess = new int[] { 9, 5, 4, 1 };
-        while (_number >= 1) {
-            var scale = GetScale();
-            foreach (var number in numbersToProcess) {
-                _numberInRomanNumeral += ProcessNumberOnScale(number, scale);
-            }
+    private void ProcessNumber()
+    {
+        while (_number >= 1)
+        {          
+            _numberInRomanNumeral += ProcessNumberOnScale();
         }
     }
 
-    private string ProcessNumberOnScale(int number, int scale) {
-        var numberToProcess = number * scale;
-        if (_number < numberToProcess) return string.Empty;
-        _number -= numberToProcess;
-        if (numberToProcess.Equals(9 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[10 * scale];
-        if (numberToProcess.Equals(4 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
-        return RomanNumerals[numberToProcess];
+    private string ProcessNumberOnScale()
+    {
+        var scale = GetScale();
+        var scaleSection = GetScaleSection();
+        var numberToSubtract = scaleSection * scale;
+        _number -= numberToSubtract;
+        if (numberToSubtract.Equals(9 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[10 * scale];
+        if (numberToSubtract.Equals(4 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
+        return RomanNumerals[numberToSubtract];
+    }
+    private int GetScaleSection()
+    {
+        var result = _number / GetScale();
+        if (result >= 9) return 9;
+        if (result >= 5) return 5;
+        if (result >= 4) return 4;
+        return 1;
     }
 
     private int GetScale()
