@@ -20,15 +20,14 @@ public class RomanNumeralConverter {
 
     public static string ToRomanNumeral(int number) {
         var romanNumeralConverter = new RomanNumeralConverter(number);
-        foreach (var scale in NumericalScale.GetScales()) {
-          romanNumeralConverter.ProcessNumbersOf(scale);
-        }
+        romanNumeralConverter.ProcessNumber();
         return romanNumeralConverter._numberInRomanNumeral;
     }
 
-    private void ProcessNumbersOf(int scale) {
+    private void ProcessNumber() {
         var numbersToProcess = new int[] { 9, 5, 4, 1 };
-        while (_number >= scale) {
+        while (_number >= 1) {
+            var scale = GetScale();
             foreach (var number in numbersToProcess) {
                 _numberInRomanNumeral += ProcessNumberOnScale(number, scale);
             }
@@ -43,19 +42,12 @@ public class RomanNumeralConverter {
         if (numberToProcess.Equals(4 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
         return RomanNumerals[numberToProcess];
     }
-}
 
-public static class NumericalScale {
-    private static int Units => 1;
-    private static int Tens => 10;
-    private static int Hundreds => 100;
-    private static int Thousands => 1000;
-
-    public static IEnumerable<int> GetScales() => new List<int>()
+    private int GetScale()
     {
-        Thousands,
-        Hundreds,
-        Tens,
-        Units
-    };
+        if (_number >= 1000) return 1000;
+        if (_number >= 100) return 100;
+        if (_number >= 10) return 10;
+        return 1;
+    }
 }
