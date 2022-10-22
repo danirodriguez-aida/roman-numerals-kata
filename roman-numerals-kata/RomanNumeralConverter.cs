@@ -4,6 +4,7 @@ public class RomanNumeralConverter
 {
     private int _number;
     private string _numberInRomanNumeral = string.Empty;
+
     private static readonly Dictionary<int, string> RomanNumerals = new()
     {
         { 1, "I" },
@@ -13,6 +14,14 @@ public class RomanNumeralConverter
         { 100, "C" },
         { 500, "D" },
         { 1000, "M" },
+    };
+
+    private static readonly Dictionary<int, Func<int, string>> RomanNumeralCalc = new()
+    {
+       { 1, (scale) => RomanNumerals[1 * scale]},
+       { 4, (scale) => RomanNumerals[1 * scale] + RomanNumerals[5 * scale]},
+       { 5, (scale) => RomanNumerals[5 * scale]},
+       { 9, (scale) => RomanNumerals[1 * scale] + RomanNumerals[10 * scale]},
     };
 
     public RomanNumeralConverter(int number)
@@ -30,7 +39,7 @@ public class RomanNumeralConverter
     private void ProcessNumber()
     {
         while (_number >= 1)
-        {          
+        {
             _numberInRomanNumeral += ProcessNumberOnScale();
         }
     }
@@ -41,16 +50,16 @@ public class RomanNumeralConverter
         var scaleSection = GetScaleSection();
         var numberToSubtract = scaleSection * scale;
         _number -= numberToSubtract;
-        if (numberToSubtract.Equals(9 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[10 * scale];
-        if (numberToSubtract.Equals(4 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
-        return RomanNumerals[numberToSubtract];
+        return RomanNumeralCalc[scaleSection](scale);
     }
+
+
     private int GetScaleSection()
     {
-        var result = _number / GetScale();
-        if (result >= 9) return 9;
-        if (result >= 5) return 5;
-        if (result >= 4) return 4;
+        var scaleSection = _number / GetScale();
+        if (scaleSection >= 9) return 9;
+        if (scaleSection >= 5) return 5;
+        if (scaleSection >= 4) return 4;
         return 1;
     }
 
