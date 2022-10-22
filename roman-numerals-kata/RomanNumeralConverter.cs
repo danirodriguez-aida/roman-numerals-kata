@@ -39,14 +39,9 @@ public class RomanNumeralConverter {
         var numberToProcess = number * scale;
         if (_number < numberToProcess) return string.Empty;
         _number -= numberToProcess;
-        if (numberToProcess.IsMultipleOf(9 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[10 * scale];
-        if (numberToProcess.IsMultipleOf(4 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
+        if (numberToProcess.Equals(9 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[10 * scale];
+        if (numberToProcess.Equals(4 * scale)) return RomanNumerals[1 * scale] + RomanNumerals[5 * scale];
         return RomanNumerals[numberToProcess];
-    }
-}
-public static class MultiplesExtension {
-    public static bool IsMultipleOf(this int number, int multiple) {
-        return number % multiple == 0;
     }
 }
 
